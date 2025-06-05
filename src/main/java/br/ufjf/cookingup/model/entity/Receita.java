@@ -1,8 +1,10 @@
-package br.ufjf.cookingup.domain;
+package br.ufjf.cookingup.model.entity;
 
 import java.sql.Date;
 import java.util.ArrayList;
 
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Receita {
+	@Id
+	private Long id;
 	private String titulo;
 	private String descricao;
 	private Integer porcoes;
@@ -19,6 +23,7 @@ public class Receita {
 	private String imagemUrl;
 	private Date dataCadastro;
 	private Date dataFim;
-	private ArrayList<IngredienteReceita> ingredientesReceita;
+	//private ArrayList<IngredienteReceita> ingredientesReceita;
+	@ManyToOne
 	private Categoria categoria;
 }

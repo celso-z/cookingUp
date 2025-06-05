@@ -1,5 +1,6 @@
-package br.ufjf.cookingup.domain;
+package br.ufjf.cookingup.model.entity;
 
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,8 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Ingrediente {
+public class Categoria {
+	@Id
 	private Long id;
 	private String nome;
-	private String unidadePadrao;
 }

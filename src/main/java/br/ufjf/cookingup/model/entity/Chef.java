@@ -1,4 +1,4 @@
-package br.ufjf.cookingup.domain;
+package br.ufjf.cookingup.model.entity;
 
 import java.util.ArrayList;
 

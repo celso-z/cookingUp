@@ -1,7 +1,9 @@
-package br.ufjf.cookingup.domain;
+package br.ufjf.cookingup.model.entity;
 
 import java.util.ArrayList;
 
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LivroReceita {
+	@Id
+	private Long id;
 	private String titulo;
-	private ArrayList<Receita> receitas;
+	@ManyToOne
+	private Membro proprietario;
 }

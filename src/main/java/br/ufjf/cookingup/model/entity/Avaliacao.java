@@ -1,7 +1,8 @@
-package br.ufjf.cookingup.domain;
+package br.ufjf.cookingup.model.entity;
 
 import java.sql.Date;
 
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Avaliacao {
+	@Id
 	private Long id;
 	private Integer nota;
 	private String consideracoes;
