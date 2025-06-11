@@ -1,5 +1,6 @@
 package br.ufjf.cookingup.model.entity;
 
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import jakarta.persistence.Inheritance;
 
 @Data
 @Entity
+@Table(name = "tb_usuario")
 @Inheritance
 @NoArgsConstructor
 @AllArgsConstructor
