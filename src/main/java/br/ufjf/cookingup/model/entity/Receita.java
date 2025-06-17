@@ -3,6 +3,7 @@ package br.ufjf.cookingup.model.entity;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 public class Receita {
@@ -24,6 +26,7 @@ public class Receita {
 	private Date dataCadastro;
 	private Date dataFim;
 	//private ArrayList<IngredienteReceita> ingredientesReceita;
+
 	@ManyToOne
 	private Categoria categoria;
 }
