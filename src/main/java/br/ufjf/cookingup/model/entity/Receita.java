@@ -1,7 +1,6 @@
 package br.ufjf.cookingup.model.entity;
 
 import java.sql.Date;
-import java.util.ArrayList;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

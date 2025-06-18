@@ -1,6 +1,7 @@
 package br.ufjf.cookingup.model.dto;
 
 import br.ufjf.cookingup.model.entity.Chef;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
