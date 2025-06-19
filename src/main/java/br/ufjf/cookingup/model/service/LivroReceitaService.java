@@ -13,7 +13,7 @@ public class LivroReceitaService {
     @Autowired
     private LivroReceitaRepository livroReceitaRepository;
 
-    public LivroReceitaDTO findById(Long id) {
+    public LivroReceitaDTO buscarPorId(Long id) {
         LivroReceita livro = livroReceitaRepository.findById(id)
                 .orElseThrow(() -> new RegraNegocioException("Livro não encontrado com id: " + id));
         return LivroReceitaDTO.create(livro);

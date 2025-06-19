@@ -13,7 +13,7 @@ public class ChefService {
     @Autowired
     private ChefRepository chefRepository;
 
-    public ChefDTO findById(Long id) {
+    public ChefDTO buscarPorId(Long id) {
         Chef chef = chefRepository.findById(id)
                 .orElseThrow(() -> new RegraNegocioException("Chef não encontrado com id: " + id));
         return ChefDTO.create(chef);

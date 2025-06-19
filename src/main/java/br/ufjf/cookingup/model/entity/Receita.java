@@ -1,6 +1,7 @@
 package br.ufjf.cookingup.model.entity;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -22,8 +23,8 @@ public class Receita {
 	private String modoPreparo;
 	private Integer tempoPreparo;
 	private String imagemUrl;
-	private Date dataCadastro;
-	private Date dataFim;
+	private LocalDate dataCadastro;
+	private LocalDate dataFim;
 	//private ArrayList<IngredienteReceita> ingredientesReceita;
 
 	@ManyToOne

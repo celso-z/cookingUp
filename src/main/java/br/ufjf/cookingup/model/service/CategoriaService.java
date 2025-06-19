@@ -13,7 +13,7 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    public CategoriaDTO findById(Long id){
+    public CategoriaDTO buscarPorId(Long id){
             Categoria categoria = categoriaRepository.findById(id)
                     .orElseThrow(() -> new RegraNegocioException("Categoria não encontrada com id: " + id));
             return new CategoriaDTO(categoria);

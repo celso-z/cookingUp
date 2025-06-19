@@ -13,9 +13,9 @@ public class AlternativaIngredienteService {
     @Autowired
     private AlternativaIngredienteRepository alternativaIngredienteRepository;
 
-    public AlternativaIngredienteDTO findById(Long id) {
+    public AlternativaIngredienteDTO buscarPorId(Long id) {
         AlternativaIngrediente alterantivaIngrediente = alternativaIngredienteRepository.findById(id)
-                .orElseThrow(() -> new RegraNegocioException("Alternativa   do Ingrediente não encontrada com id: " + id));
+                .orElseThrow(() -> new RegraNegocioException("Alternativa  do Ingrediente não encontrada com id: " + id));
         return AlternativaIngredienteDTO.create(alterantivaIngrediente);
     }
 }

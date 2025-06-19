@@ -4,7 +4,7 @@ import br.ufjf.cookingup.model.entity.Avaliacao;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -12,7 +12,7 @@ public class AvaliacaoDTO {
     private Long id;
     private Integer nota;
     private String consideracoes;
-    private Date data;
+    private LocalDate data;
     private Long idAvaliador;
     private String nomeAvaliador;
     private Long idReceitaAvaliada;

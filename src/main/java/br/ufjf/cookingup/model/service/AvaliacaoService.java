@@ -13,9 +13,9 @@ public class AvaliacaoService {
     @Autowired
     private AvaliacaoRepository avaliacaoRepository;
 
-    public AvaliacaoDTO findById(Long id) {
+    public AvaliacaoDTO buscarPorId(Long id) {
         Avaliacao avaliacao = avaliacaoRepository.findById(id)
-                .orElseThrow(() -> new RegraNegocioException("Categoria não encontrada com id: " + id));
+                .orElseThrow(() -> new RegraNegocioException("Avaliação não encontrada com id: " + id));
         return AvaliacaoDTO.create(avaliacao);
     }
 }

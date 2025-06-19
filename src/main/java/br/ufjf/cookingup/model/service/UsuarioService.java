@@ -13,7 +13,7 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public UsuarioDTO findById(Long id) {
+    public UsuarioDTO buscarPorId(Long id) {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new RegraNegocioException("Usuário não encontrado com id: " + id));
         return new UsuarioDTO(usuario);

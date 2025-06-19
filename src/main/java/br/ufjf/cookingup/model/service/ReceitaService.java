@@ -13,7 +13,7 @@ public class ReceitaService {
     @Autowired
     private ReceitaRepository receitaRepository;
 
-    public ReceitaDTO findById(Long id) {
+    public ReceitaDTO buscarPorId(Long id) {
         Receita receita = receitaRepository.findById(id)
                 .orElseThrow(() -> new RegraNegocioException("Receita não encontrada com id: " + id));
         return ReceitaDTO.create(receita);

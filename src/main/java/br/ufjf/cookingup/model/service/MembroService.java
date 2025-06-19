@@ -13,7 +13,7 @@ public class MembroService {
     @Autowired
     private MembroRepository membroRepository;
 
-    public MembroDTO findById(Long id) {
+    public MembroDTO buscarPorId(Long id) {
         Membro membro = membroRepository.findById(id)
                 .orElseThrow(() -> new RegraNegocioException("Membro não encontrado com id: " + id));
         return MembroDTO.create(membro);

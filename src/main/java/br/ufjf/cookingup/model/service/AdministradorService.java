@@ -13,7 +13,7 @@ public class AdministradorService {
     @Autowired
     AdministradorRepository administradorRepository;
 
-    public AdministradorDTO findById(Long id) {
+    public AdministradorDTO buscarPorId(Long id) {
         Administrador administrador = administradorRepository.findById(id)
                 .orElseThrow(() -> new RegraNegocioException("Administrador não encontrada com id: " + id));
         return AdministradorDTO.create(administrador);

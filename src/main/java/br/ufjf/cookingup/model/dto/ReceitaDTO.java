@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -16,8 +17,8 @@ public class ReceitaDTO {
     private String modoPreparo;
     private Integer tempoPreparo;
     private String imagemUrl;
-    private Date dataCadastro;
-    private Date dataFim;
+    private LocalDate dataCadastro;
+    private LocalDate dataFim;
     private Long idCategoria;
     private String nomeCategoria;
     // private ArrayList<IngredienteReceita> ingredientesReceita;

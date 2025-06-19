@@ -1,12 +1,10 @@
 package br.ufjf.cookingup.model.dto;
 
 import br.ufjf.cookingup.model.entity.Chef;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
-
 import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
