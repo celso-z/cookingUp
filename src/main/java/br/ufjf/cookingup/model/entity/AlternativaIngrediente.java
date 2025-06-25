@@ -1,6 +1,8 @@
 package br.ufjf.cookingup.model.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
@@ -14,6 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AlternativaIngrediente {
 	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@OneToOne
 	Ingrediente ingrediente;
