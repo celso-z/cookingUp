@@ -20,11 +20,13 @@ public class Avaliacao {
 	private Long id;
 	private Integer nota;
 	private String consideracoes;
-	private LocalDate data;
+	private LocalDate dataInicio;
+	private LocalDate dataFim;
 	@ManyToOne
 	private Membro avaliador;
 
 	@ManyToOne
 	private Receita receitaAvaliada;
+
 
 }

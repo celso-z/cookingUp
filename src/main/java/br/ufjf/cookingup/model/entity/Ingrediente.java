@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -18,4 +20,6 @@ public class Ingrediente {
 	private Long id;
 	private String nome;
 	private String unidadePadrao;
+	private LocalDate dataInicio;
+	private LocalDate dataFim;
 }

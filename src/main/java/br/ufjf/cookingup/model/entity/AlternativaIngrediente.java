@@ -10,6 +10,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -22,4 +24,6 @@ public class AlternativaIngrediente {
 	Ingrediente ingrediente;
 	@ManyToOne
 	Ingrediente alternativa;
+	private LocalDate dataInicio;
+	private LocalDate dataFim;
 }

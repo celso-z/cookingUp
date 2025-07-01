@@ -4,8 +4,12 @@ import br.ufjf.cookingup.exception.RegraNegocioException;
 import br.ufjf.cookingup.model.dto.CategoriaDTO;
 import br.ufjf.cookingup.model.entity.Categoria;
 import br.ufjf.cookingup.model.repository.CategoriaRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoriaService {
@@ -13,9 +17,57 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    public CategoriaDTO buscarPorId(Long id){
-            Categoria categoria = categoriaRepository.findById(id)
-                    .orElseThrow(() -> new RegraNegocioException("Categoria não encontrada com id: " + id));
-            return new CategoriaDTO(categoria);
+    private ModelMapper modelMapper;
+
+    public CategoriaDTO salvar(CategoriaDTO dto) {
+        Categoria categoria = modelMapper.map(dto, Categoria.class);
+        categoria.setDataInicio(LocalDate.now());
+        categoria.setDataFim(null);
+        categoria = categoriaRepository.save(categoria);
+        return new CategoriaDTO(categoria);
+    }
+
+    public List<CategoriaDTO> buscarTodos() {
+        return categoriaRepository.findByDataFimIsNull()
+                .stream()
+                .map(CategoriaDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    public Categoria buscarEntidadePorId(Long id) {
+        return categoriaRepository.findById(id)
+                .orElseThrow(() -> new RegraNegocioException("Categoria não encontrada com id: " + id));
+    }
+
+    public CategoriaDTO buscarDTOporId(Long id) {
+        Categoria categoria = buscarEntidadePorId(id);
+        if (categoria.getDataFim() != null) {
+            throw new RegraNegocioException("Categoria com id: " + id + " já foi deletada.");
+        }
+        return new CategoriaDTO(categoria);
+    }
+
+    public CategoriaDTO atualizar(Long id, CategoriaDTO dto) {
+        Categoria categoriaExistente = buscarEntidadePorId(id);
+
+        if (categoriaExistente.getDataFim() != null) {
+            throw new RegraNegocioException("Não é possível atualizar uma categoria que já foi deletada com id: " + id);
+        }
+
+        modelMapper.map(dto, categoriaExistente);
+        categoriaExistente.setId(id);
+
+        Categoria categoriaAtualizada = categoriaRepository.save(categoriaExistente);
+        return new CategoriaDTO(categoriaAtualizada);
+    }
+
+    public void deletar(Long id) {
+        Categoria categoria = buscarEntidadePorId(id);
+
+        if (categoria.getDataFim() != null) {
+            throw new RegraNegocioException("Categoria com id: " + id + " já foi deletada.");
+        }
+        categoria.setDataFim(LocalDate.now());
+        categoriaRepository.save(categoria);
     }
 }

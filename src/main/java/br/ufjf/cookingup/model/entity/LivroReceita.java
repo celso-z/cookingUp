@@ -1,5 +1,6 @@
 package br.ufjf.cookingup.model.entity;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import jakarta.persistence.Entity;
@@ -26,4 +27,6 @@ public class LivroReceita {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "membro_id", nullable = false)
 	private Membro proprietario;
+	private LocalDate dataInicio;
+	private LocalDate dataFim;
 }

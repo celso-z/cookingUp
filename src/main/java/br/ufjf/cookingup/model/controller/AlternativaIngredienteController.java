@@ -4,6 +4,7 @@ import br.ufjf.cookingup.model.dto.AlternativaIngredienteDTO;
 import br.ufjf.cookingup.model.service.AlternativaIngredienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,9 +21,9 @@ public class AlternativaIngredienteController {
     private AlternativaIngredienteService alteranativaIngredienteService;
 
     @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public AlternativaIngredienteDTO buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<AlternativaIngredienteDTO> buscarPorId(@PathVariable Long id) {
         System.out.println("AlternativaIngredienteController.buscarPorId");
-        return alteranativaIngredienteService.buscarPorId(id);
+        AlternativaIngredienteDTO alternativa = alteranativaIngredienteService.buscarPorId(id);
+        return ResponseEntity.ok(alternativa);
     }
 }

@@ -14,8 +14,6 @@ public class AlternativaIngredienteDTO {
     private String nomeIngrediente;
     private String nomeAlternativa;
 
-
-
     public static AlternativaIngredienteDTO create(AlternativaIngrediente ingrediente) {
         ModelMapper modelMapper = new ModelMapper();
         AlternativaIngredienteDTO dto = modelMapper.map(ingrediente, AlternativaIngredienteDTO.class);

@@ -13,6 +13,7 @@ public class IngredienteReceitaDTO {
     private String observacoes;
     private String unidade;
     private Long idIngrediente;
+    private Long idReceita;
     private String nomeIngrediente;
 
     public static IngredienteReceitaDTO create(IngredienteReceita ingredienteReceita) {
@@ -22,6 +23,9 @@ public class IngredienteReceitaDTO {
         if (ingredienteReceita.getIngrediente() != null) {
             dto.setIdIngrediente(ingredienteReceita.getIngrediente().getId());
             dto.setNomeIngrediente(ingredienteReceita.getIngrediente().getNome());
+        }
+        if (ingredienteReceita.getReceita() != null) {
+            dto.setIdReceita(ingredienteReceita.getReceita().getId());
         }
 
         return dto;

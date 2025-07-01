@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -23,4 +25,7 @@ public class ReceitaLivroReceita {
 
 	@ManyToOne
 	private Receita receita;
+
+	private LocalDate dataInicio;
+	private LocalDate dataFim;
 }
