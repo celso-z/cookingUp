@@ -23,6 +23,6 @@ public class IngredienteController {
     @ResponseStatus(HttpStatus.OK)
     public IngredienteDTO buscarPorId(@PathVariable Long id) {
         System.out.println("IngredienteController.buscarPorId");
-        return ingredienteService.buscarPorId(id);
+        return ingredienteService.buscarDTOporId(id);
     }
 }

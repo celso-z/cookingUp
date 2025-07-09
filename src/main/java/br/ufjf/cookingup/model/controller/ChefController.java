@@ -23,6 +23,6 @@ public class ChefController {
     @ResponseStatus(HttpStatus.OK)
     public ChefDTO buscarPorId(@PathVariable Long id) {
         System.out.println("ChefController.buscarPorId");
-        return chefService.buscarPorId(id);
+        return chefService.buscarDTOporId(id);
     }
 }

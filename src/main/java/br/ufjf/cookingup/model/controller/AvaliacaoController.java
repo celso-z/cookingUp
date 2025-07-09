@@ -24,6 +24,6 @@ public class AvaliacaoController {
     @ResponseStatus(HttpStatus.OK)
     public AvaliacaoDTO buscarPorId(@PathVariable Long id) {
         System.out.println("AvaliacaoController.buscarPorId");
-        return avaliacaoService.buscarPorId(id);
+        return avaliacaoService.buscarDTOporId(id);
     }
 }

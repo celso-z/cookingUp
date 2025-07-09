@@ -34,21 +34,18 @@ public class AdministradorService {
                 .collect(Collectors.toList());
     }
 
-    public Administrador buscarEntidadePorId(Long id) {
+    public Administrador buscarPorId(Long id) {
         return administradorRepository.findById(id)
                 .orElseThrow(() -> new RegraNegocioException("Administrador não encontrado com id: " + id));
     }
 
     public AdministradorDTO buscarDTOporId(Long id) {
-        Administrador administrador = buscarEntidadePorId(id);
-        if (administrador.getDataFim() != null) {
-            throw new RegraNegocioException("Administrador com id: " + id + " já foi deletado.");
-        }
+        Administrador administrador = buscarPorId(id);
         return AdministradorDTO.create(administrador);
     }
 
     public AdministradorDTO atualizar(Long id, AdministradorDTO dto) {
-        Administrador administradorExistente = buscarEntidadePorId(id);
+        Administrador administradorExistente = buscarPorId(id);
 
         if (administradorExistente.getDataFim() != null) {
             throw new RegraNegocioException("Não é possível atualizar um administrador que já foi deletado com id: " + id);
@@ -62,7 +59,7 @@ public class AdministradorService {
     }
 
     public void deletar(Long id) {
-        Administrador administrador = buscarEntidadePorId(id);
+        Administrador administrador = buscarPorId(id);
 
         if (administrador.getDataFim() != null) {
             throw new RegraNegocioException("Administrador com id: " + id + " já foi deletado.");

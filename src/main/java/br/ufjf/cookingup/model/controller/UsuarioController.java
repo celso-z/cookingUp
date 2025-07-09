@@ -23,6 +23,6 @@ public class UsuarioController {
     @ResponseStatus(HttpStatus.OK)
     public UsuarioDTO buscarPorId(@PathVariable Long id) {
         System.out.println("UsuarioController.buscarPorId");
-        return usuarioService.buscarPorId(id);
+        return usuarioService.buscarDTOporId(id);
     }
 }

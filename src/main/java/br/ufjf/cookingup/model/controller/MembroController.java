@@ -23,6 +23,6 @@ public class MembroController {
     @ResponseStatus(HttpStatus.OK)
     public MembroDTO buscarPorId(@PathVariable Long id) {
         System.out.println("MembroController.buscarPorId");
-        return membroService.buscarPorId(id);
+        return membroService.buscarDTOporId(id);
     }
 }

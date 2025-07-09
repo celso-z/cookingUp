@@ -23,7 +23,7 @@ public class AlternativaIngredienteController {
     @GetMapping("/{id}")
     public ResponseEntity<AlternativaIngredienteDTO> buscarPorId(@PathVariable Long id) {
         System.out.println("AlternativaIngredienteController.buscarPorId");
-        AlternativaIngredienteDTO alternativa = alteranativaIngredienteService.buscarPorId(id);
+        AlternativaIngredienteDTO alternativa = alteranativaIngredienteService.buscarDTOporId(id);
         return ResponseEntity.ok(alternativa);
     }
 }

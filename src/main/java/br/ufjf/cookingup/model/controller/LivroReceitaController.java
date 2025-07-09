@@ -23,6 +23,6 @@ public class LivroReceitaController {
     @ResponseStatus(HttpStatus.OK)
     public LivroReceitaDTO buscarPorId(@PathVariable Long id) {
         System.out.println("LivroReceitaController.buscarPorId");
-        return livroReceitaService.buscarPorId(id);
+        return livroReceitaService.buscarDTOporId(id);
     }
 }

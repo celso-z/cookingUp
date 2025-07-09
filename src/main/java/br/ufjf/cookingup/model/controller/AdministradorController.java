@@ -23,7 +23,7 @@ public class AdministradorController {
     @GetMapping("/{id}")
     public ResponseEntity<AdministradorDTO> buscarPorId(@PathVariable Long id) {
         System.out.println("AdministradorController.buscarPorId");
-        AdministradorDTO administrador = administradorService.buscarPorId(id);
+        AdministradorDTO administrador = administradorService.buscarDTOporId(id);
         return ResponseEntity.ok(administrador);
     }
 }

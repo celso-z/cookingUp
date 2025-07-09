@@ -24,6 +24,6 @@ public class CategoriaController {
     @ResponseStatus(HttpStatus.OK)
     public CategoriaDTO buscarPorId(@PathVariable Long id) {
         System.out.println("CategoriaController.buscarPorId");
-        return categoriaService.buscarPorId(id);
+        return categoriaService.buscarDTOporId(id);
     }
 }

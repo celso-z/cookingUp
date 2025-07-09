@@ -1,5 +1,6 @@
 package br.ufjf.cookingup.model.service;
 
+
 import br.ufjf.cookingup.exception.RegraNegocioException;
 import br.ufjf.cookingup.model.dto.AvaliacaoDTO;
 import br.ufjf.cookingup.model.entity.Avaliacao;
@@ -27,7 +28,6 @@ public class AvaliacaoService {
     @Autowired
     private ReceitaRepository receitaRepository;
 
-    @Autowired
     private ModelMapper modelMapper;
 
     public AvaliacaoDTO salvar(AvaliacaoDTO dto) {

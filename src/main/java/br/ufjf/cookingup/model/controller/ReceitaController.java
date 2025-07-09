@@ -23,7 +23,7 @@ public class ReceitaController {
     @ResponseStatus(HttpStatus.OK)
     public ReceitaDTO buscarPorId(@PathVariable Long id) {
         System.out.println("ReceitaController.buscarPorId");
-        return receitaService.buscarPorId(id);
+        return receitaService.buscarDTOporId(id);
     }
 
 }
