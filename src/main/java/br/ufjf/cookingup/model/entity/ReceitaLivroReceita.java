@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class ReceitaLivroReceita {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_receita_livro_receita")
+	@SequenceGenerator(name = "seq_receita_livro_receita", sequenceName = "seq_receita_livro_receita", allocationSize = 1)
 	private Long id;
 
 	@ManyToOne

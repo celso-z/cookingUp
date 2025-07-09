@@ -27,9 +27,6 @@ import lombok.NoArgsConstructor;
 		@AttributeOverride(name = "fotoPerfil", column = @Column(name = "foto_perfil"))       // Use snake_case
 })
 public class Membro extends Usuario {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 	private Integer nivel;
 // Se for usar listas, use List e anote corretamente:
 // @OneToMany
