@@ -17,7 +17,6 @@ public class MembroService {
     @Autowired
     private MembroRepository membroRepository;
 
-    @Autowired
     private ModelMapper modelMapper;
 
     public MembroDTO salvar(MembroDTO dto) {
