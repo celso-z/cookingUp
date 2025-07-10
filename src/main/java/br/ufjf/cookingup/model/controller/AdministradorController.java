@@ -3,14 +3,10 @@ package br.ufjf.cookingup.model.controller;
 import br.ufjf.cookingup.model.dto.AdministradorDTO;
 import br.ufjf.cookingup.model.service.AdministradorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/administrador")
@@ -18,12 +14,31 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdministradorController {
 
     @Autowired
-    private  AdministradorService administradorService;
+    private AdministradorService administradorService;
 
     @GetMapping("/{id}")
     public ResponseEntity<AdministradorDTO> buscarPorId(@PathVariable Long id) {
-        System.out.println("AdministradorController.buscarPorId");
-        AdministradorDTO administrador = administradorService.buscarDTOporId(id);
-        return ResponseEntity.ok(administrador);
+        return ResponseEntity.ok(administradorService.buscarDTOporId(id));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<AdministradorDTO>> listarTodos() {
+        return ResponseEntity.ok(administradorService.buscarTodos());
+    }
+
+    @PostMapping
+    public ResponseEntity<AdministradorDTO> criar(@RequestBody AdministradorDTO dto) {
+        return ResponseEntity.ok(administradorService.salvar(dto));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<AdministradorDTO> atualizar(@PathVariable Long id, @RequestBody AdministradorDTO dto) {
+        return ResponseEntity.ok(administradorService.atualizar(id, dto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        administradorService.deletar(id);
+        return ResponseEntity.noContent().build();
     }
 }

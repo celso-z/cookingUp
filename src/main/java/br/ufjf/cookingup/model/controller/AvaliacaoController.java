@@ -1,29 +1,44 @@
 package br.ufjf.cookingup.model.controller;
 
+    import br.ufjf.cookingup.model.dto.AvaliacaoDTO;
+    import br.ufjf.cookingup.model.service.AvaliacaoService;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.web.bind.annotation.*;
 
-import br.ufjf.cookingup.model.dto.AvaliacaoDTO;
-import br.ufjf.cookingup.model.service.AvaliacaoService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+    import java.util.List;
 
-@RestController
-@RequestMapping("/avaliacao")
-@CrossOrigin("*")
-public class AvaliacaoController {
+    @RestController
+    @RequestMapping("/avaliacao")
+    @CrossOrigin("*")
+    public class AvaliacaoController {
 
-    @Autowired
-    private AvaliacaoService avaliacaoService;
+        @Autowired
+        private AvaliacaoService avaliacaoService;
 
-    @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public AvaliacaoDTO buscarPorId(@PathVariable Long id) {
-        System.out.println("AvaliacaoController.buscarPorId");
-        return avaliacaoService.buscarDTOporId(id);
+        @GetMapping("/{id}")
+        public ResponseEntity<AvaliacaoDTO> buscarPorId(@PathVariable Long id) {
+            return ResponseEntity.ok(avaliacaoService.buscarDTOporId(id));
+        }
+
+        @GetMapping
+        public ResponseEntity<List<AvaliacaoDTO>> listarTodos() {
+            return ResponseEntity.ok(avaliacaoService.buscarTodos());
+        }
+
+        @PostMapping
+        public ResponseEntity<AvaliacaoDTO> criar(@RequestBody AvaliacaoDTO dto) {
+            return ResponseEntity.ok(avaliacaoService.salvar(dto));
+        }
+
+        @PutMapping("/{id}")
+        public ResponseEntity<AvaliacaoDTO> atualizar(@PathVariable Long id, @RequestBody AvaliacaoDTO dto) {
+            return ResponseEntity.ok(avaliacaoService.atualizar(id, dto));
+        }
+
+        @DeleteMapping("/{id}")
+        public ResponseEntity<Void> deletar(@PathVariable Long id) {
+            avaliacaoService.deletar(id);
+            return ResponseEntity.noContent().build();
+        }
     }
-}
