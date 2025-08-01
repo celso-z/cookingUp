@@ -4,6 +4,7 @@ import br.ufjf.cookingup.exception.RegraNegocioException;
 import br.ufjf.cookingup.model.dto.AdministradorDTO;
 import br.ufjf.cookingup.model.entity.Administrador;
 import br.ufjf.cookingup.model.repository.AdministradorRepository;
+import br.ufjf.cookingup.model.validator.AdministradorValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ public class AdministradorService {
     @Autowired
     private AdministradorRepository administradorRepository;
 
+    @Autowired
+    private AdministradorValidator administradorValidator;
+
     public Administrador converter(AdministradorDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(dto, Administrador.class);
@@ -28,6 +32,7 @@ public class AdministradorService {
     }
 
     public AdministradorDTO salvar(AdministradorDTO dto) {
+        administradorValidator.validar(dto);
         Administrador administrador = converter(dto);
         administrador.setDataCadastro(LocalDate.now());
         administrador.setDataFim(null);
@@ -53,6 +58,7 @@ public class AdministradorService {
     }
 
     public AdministradorDTO atualizar(Long id, AdministradorDTO dto) {
+        administradorValidator.validar(dto);
         Administrador administradorExistente = buscarPorId(id);
 
         if (administradorExistente.getDataFim() != null) {
