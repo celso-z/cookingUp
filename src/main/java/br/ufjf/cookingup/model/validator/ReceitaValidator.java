@@ -47,7 +47,10 @@ public class ReceitaValidator {
             throw new IllegalArgumentException("Tempo de preparo não pode ser maior que 24 horas");
         }
 
-        if (receitaDTO.getIdCategoria() == null || receitaDTO.getIdCategoria() <= 0) {
+        if (receitaDTO.getIdCategoria() == null) {
+            throw new IllegalArgumentException("É necessário selecionar uma categoria para a receita");
+        }
+        if (receitaDTO.getIdCategoria() <= 0) {
             throw new IllegalArgumentException("ID da categoria deve ser positivo");
         }
 

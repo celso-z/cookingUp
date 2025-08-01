@@ -11,9 +11,9 @@ public class IngredienteValidator {
             throw new IllegalArgumentException("Nome do ingrediente não pode ser vazio");
         }
 
-        if (ingredienteDTO.getUnidadePadrao() == null || ingredienteDTO.getUnidadePadrao().trim().isEmpty()) {
-            throw new IllegalArgumentException("Unidade padrão não pode ser vazia");
-        }
+            if (ingredienteDTO.getUnidadePadrao() == null || ingredienteDTO.getUnidadePadrao().trim().isEmpty()) {
+                throw new IllegalArgumentException("Unidade de medida não pode ser vazia");
+            }
 
         if (ingredienteDTO.getNome().length() > 100) {
             throw new IllegalArgumentException("Nome do ingrediente não pode ter mais de 100 caracteres");

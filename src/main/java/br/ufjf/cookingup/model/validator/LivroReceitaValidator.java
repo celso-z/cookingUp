@@ -11,16 +11,15 @@ public class LivroReceitaValidator {
             throw new IllegalArgumentException("Título do livro de receita não pode ser vazio");
         }
 
-        if (livroReceitaDTO.getIdProprietario() == null || livroReceitaDTO.getIdProprietario() <= 0) {
-            throw new IllegalArgumentException("ID do proprietário deve ser positivo");
-        }
-
         if (livroReceitaDTO.getTitulo().length() > 200) {
             throw new IllegalArgumentException("Título não pode ter mais de 200 caracteres");
         }
 
-        if (livroReceitaDTO.getNomeProprietario() == null || livroReceitaDTO.getNomeProprietario().trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome do proprietário não pode ser vazio");
+        if (livroReceitaDTO.getIdProprietario() == null) {
+            throw new IllegalArgumentException("ID do proprietário não pode estar vazio");
+        }
+        if (livroReceitaDTO.getIdProprietario() <= 0) {
+            throw new IllegalArgumentException("ID do proprietário deve ser positivo");
         }
     }
 }

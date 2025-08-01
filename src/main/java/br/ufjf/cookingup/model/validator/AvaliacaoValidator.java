@@ -11,11 +11,17 @@ public class AvaliacaoValidator {
             throw new IllegalArgumentException("Nota deve estar entre 1 e 5");
         }
 
-        if (avaliacaoDTO.getIdAvaliador() == null || avaliacaoDTO.getIdAvaliador() <= 0) {
+        if (avaliacaoDTO.getIdAvaliador() == null) {
+            throw new IllegalArgumentException("ID do avaliador é obrigatório");
+        }
+        if (avaliacaoDTO.getIdAvaliador() != null && avaliacaoDTO.getIdAvaliador() <= 0) {
             throw new IllegalArgumentException("ID do avaliador deve ser positivo");
         }
 
-        if (avaliacaoDTO.getIdReceitaAvaliada() == null || avaliacaoDTO.getIdReceitaAvaliada() <= 0) {
+        if (avaliacaoDTO.getIdReceitaAvaliada() == null) {
+            throw new IllegalArgumentException("ID da receita é obrigatório");
+        }
+        if (avaliacaoDTO.getIdReceitaAvaliada() != null && avaliacaoDTO.getIdReceitaAvaliada() <= 0) {
             throw new IllegalArgumentException("ID da receita deve ser positivo");
         }
 

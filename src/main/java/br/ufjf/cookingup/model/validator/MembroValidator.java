@@ -11,7 +11,6 @@ public class MembroValidator {
             "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
     public void validar(MembroDTO membroDTO) {
-        // Validações herdadas de UsuarioDTO
         if (membroDTO.getNome() == null || membroDTO.getNome().trim().isEmpty()) {
             throw new IllegalArgumentException("Nome do membro não pode ser vazio");
         }
@@ -28,7 +27,6 @@ public class MembroValidator {
             throw new IllegalArgumentException("Senha deve ter pelo menos 6 caracteres");
         }
 
-        // Validações específicas de MembroDTO
         if (membroDTO.getNivel() == null || membroDTO.getNivel() < 1 || membroDTO.getNivel() > 10) {
             throw new IllegalArgumentException("Nível do membro deve estar entre 1 e 10");
         }
