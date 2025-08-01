@@ -9,6 +9,7 @@ import br.ufjf.cookingup.model.entity.Receita;
 import br.ufjf.cookingup.model.repository.AvaliacaoRepository;
 import br.ufjf.cookingup.model.repository.MembroRepository;
 import br.ufjf.cookingup.model.repository.ReceitaRepository;
+import br.ufjf.cookingup.model.validator.AvaliacaoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
@@ -27,8 +28,11 @@ public class AvaliacaoService {
     @Autowired
     private ReceitaRepository receitaRepository;
 
+    @Autowired
+    private AvaliacaoValidator validator;
 
     public AvaliacaoDTO salvar(AvaliacaoDTO dto) {
+        validator.validar(dto);
         Avaliacao avaliacao = new Avaliacao();
         avaliacao.setNota(dto.getNota());
         avaliacao.setConsideracoes(dto.getConsideracoes());
@@ -68,6 +72,7 @@ public class AvaliacaoService {
     }
 
     public AvaliacaoDTO atualizar(Long id, AvaliacaoDTO dto) {
+        validator.validar(dto);
         Avaliacao avaliacaoExistente = buscarEntidadePorId(id);
 
         if (avaliacaoExistente.getDataFim() != null) {

@@ -4,6 +4,7 @@ import br.ufjf.cookingup.exception.RegraNegocioException;
 import br.ufjf.cookingup.model.dto.ChefDTO;
 import br.ufjf.cookingup.model.entity.Chef;
 import br.ufjf.cookingup.model.repository.ChefRepository;
+import br.ufjf.cookingup.model.validator.ChefValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ public class ChefService {
     @Autowired
     private ChefRepository chefRepository;
 
+    @Autowired
+    private ChefValidator validator;
+
     public Chef converter(ChefDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(dto, Chef.class);
@@ -28,6 +32,7 @@ public class ChefService {
     }
 
     public ChefDTO salvar(ChefDTO dto) {
+        validator.validar(dto);
         Chef chef = converter(dto);
         chef.setDataCadastro(LocalDate.now());
         chef.setDataFim(null);
@@ -56,6 +61,7 @@ public class ChefService {
     }
 
     public ChefDTO atualizar(Long id, ChefDTO dto) {
+        validator.validar(dto);
         Chef chefExistente = buscarEntidadePorId(id);
 
         if (chefExistente.getDataFim() != null) {

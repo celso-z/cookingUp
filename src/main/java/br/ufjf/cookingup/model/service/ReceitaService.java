@@ -11,6 +11,8 @@ import br.ufjf.cookingup.model.repository.CategoriaRepository;
 import br.ufjf.cookingup.model.repository.ReceitaRepository;
 import br.ufjf.cookingup.model.repository.IngredienteRepository;
 import br.ufjf.cookingup.model.repository.IngredienteReceitaRepository;
+import br.ufjf.cookingup.model.validator.ReceitaValidator;
+import br.ufjf.cookingup.model.validator.IngredienteReceitaValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,12 @@ public class ReceitaService {
     @Autowired
     private IngredienteReceitaRepository ingredienteReceitaRepository;
 
+    @Autowired
+    private ReceitaValidator validator;
+
+    @Autowired
+    private IngredienteReceitaValidator ingredienteReceitaValidator;
+
     public Receita converter(ReceitaDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(dto, Receita.class);
@@ -50,6 +58,7 @@ public class ReceitaService {
     }
 
     public ReceitaDTO salvar(ReceitaDTO dto) {
+        validator.validar(dto);
         Receita receita = converter(dto);
         receita.setDataCadastro(LocalDate.now());
         receita.setDataFim(null);
@@ -85,6 +94,7 @@ public class ReceitaService {
     }
 
     public ReceitaDTO atualizar(Long id, ReceitaDTO dto) {
+        validator.validar(dto);
         Receita receitaExistente = buscarEntidadePorId(id);
 
         if (receitaExistente.getDataFim() != null) {
@@ -127,6 +137,7 @@ public class ReceitaService {
     // --- Métodos para gerenciar Ingredientes da Receita ---
 
     public IngredienteReceitaDTO adicionarIngredienteNaReceita(Long idReceita, IngredienteReceitaDTO ingredienteReceitaDTO) {
+        ingredienteReceitaValidator.validar(ingredienteReceitaDTO);
         Receita receita = buscarEntidadePorId(idReceita);
         Ingrediente ingrediente = ingredienteRepository.findById(ingredienteReceitaDTO.getIdIngrediente())
                 .orElseThrow(() -> new RegraNegocioException("Ingrediente não encontrado com id: " + ingredienteReceitaDTO.getIdIngrediente()));
@@ -148,6 +159,7 @@ public class ReceitaService {
     }
 
     public IngredienteReceitaDTO atualizarIngredienteNaReceita(Long idReceita, Long idIngredienteReceita, IngredienteReceitaDTO ingredienteReceitaDTO) {
+        ingredienteReceitaValidator.validar(ingredienteReceitaDTO);
         Receita receita = buscarEntidadePorId(idReceita);
 
         IngredienteReceita ingredienteReceitaExistente = ingredienteReceitaRepository.findById(idIngredienteReceita)

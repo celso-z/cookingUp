@@ -11,6 +11,7 @@ import br.ufjf.cookingup.model.repository.LivroReceitaRepository;
 import br.ufjf.cookingup.model.repository.MembroRepository;
 import br.ufjf.cookingup.model.repository.ReceitaRepository;
 import br.ufjf.cookingup.model.repository.ReceitaLivroReceitaRepository;
+import br.ufjf.cookingup.model.validator.LivroReceitaValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
@@ -33,8 +34,11 @@ public class LivroReceitaService {
     @Autowired
     private ReceitaLivroReceitaRepository receitaLivroReceitaRepository;
 
+    @Autowired
+    private LivroReceitaValidator validator;
 
     public LivroReceitaDTO salvar(LivroReceitaDTO dto) {
+        validator.validar(dto);
         LivroReceita livroReceita = new LivroReceita();
         livroReceita.setTitulo(dto.getTitulo());
 
@@ -68,6 +72,7 @@ public class LivroReceitaService {
     }
 
     public LivroReceitaDTO atualizar(Long id, LivroReceitaDTO dto) {
+        validator.validar(dto);
         LivroReceita livroExistente = buscarEntidadePorId(id);
 
         if (livroExistente.getDataFim() != null) {

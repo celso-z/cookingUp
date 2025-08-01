@@ -4,6 +4,7 @@ import br.ufjf.cookingup.exception.RegraNegocioException;
 import br.ufjf.cookingup.model.dto.CategoriaDTO;
 import br.ufjf.cookingup.model.entity.Categoria;
 import br.ufjf.cookingup.model.repository.CategoriaRepository;
+import br.ufjf.cookingup.model.validator.CategoriaValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    @Autowired
+    private CategoriaValidator validator;
+
     public Categoria converter(CategoriaDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(dto, Categoria.class);
@@ -28,6 +32,7 @@ public class CategoriaService {
     }
 
     public CategoriaDTO salvar(CategoriaDTO dto) {
+        validator.validar(dto);
         Categoria categoria = converter(dto);
         categoria.setDataInicio(LocalDate.now());
         categoria.setDataFim(null);
@@ -56,6 +61,7 @@ public class CategoriaService {
     }
 
     public CategoriaDTO atualizar(Long id, CategoriaDTO dto) {
+        validator.validar(dto);
         Categoria categoriaExistente = buscarEntidadePorId(id);
 
         if (categoriaExistente.getDataFim() != null) {

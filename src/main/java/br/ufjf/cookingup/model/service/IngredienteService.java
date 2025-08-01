@@ -7,6 +7,7 @@ import br.ufjf.cookingup.model.entity.Ingrediente;
 import br.ufjf.cookingup.model.entity.AlternativaIngrediente;
 import br.ufjf.cookingup.model.repository.IngredienteRepository;
 import br.ufjf.cookingup.model.repository.AlternativaIngredienteRepository;
+import br.ufjf.cookingup.model.validator.IngredienteValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,9 @@ public class IngredienteService {
     @Autowired
     private AlternativaIngredienteRepository alternativaIngredienteRepository;
 
+    @Autowired
+    private IngredienteValidator validator;
+
     public Ingrediente converter(IngredienteDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(dto, Ingrediente.class);
@@ -34,6 +38,7 @@ public class IngredienteService {
     }
 
     public IngredienteDTO salvar(IngredienteDTO dto) {
+        validator.validar(dto);
         Ingrediente ingrediente = converter(dto);
         ingrediente.setDataFim(null);
         ingrediente = ingredienteRepository.save(ingrediente);
@@ -61,6 +66,7 @@ public class IngredienteService {
     }
 
     public IngredienteDTO atualizar(Long id, IngredienteDTO dto) {
+        validator.validar(dto);
         Ingrediente ingredienteExistente = buscarEntidadePorId(id);
 
         if (ingredienteExistente.getDataFim() != null) {

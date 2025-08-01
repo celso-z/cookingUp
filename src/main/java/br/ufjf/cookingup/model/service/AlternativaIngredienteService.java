@@ -6,6 +6,7 @@ import br.ufjf.cookingup.model.entity.AlternativaIngrediente;
 import br.ufjf.cookingup.model.entity.Ingrediente;
 import br.ufjf.cookingup.model.repository.AlternativaIngredienteRepository;
 import br.ufjf.cookingup.model.repository.IngredienteRepository;
+import br.ufjf.cookingup.model.validator.AlternativaIngredienteValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
@@ -21,8 +22,11 @@ public class AlternativaIngredienteService {
     @Autowired
     private IngredienteRepository ingredienteRepository;
 
+    @Autowired
+    private AlternativaIngredienteValidator validator;
 
     public AlternativaIngredienteDTO salvar(AlternativaIngredienteDTO dto) {
+        validator.validar(dto);
         AlternativaIngrediente alternativaIngrediente = new AlternativaIngrediente();
         alternativaIngrediente.setDataInicio(LocalDate.now());
         alternativaIngrediente.setDataFim(null);
@@ -61,6 +65,7 @@ public class AlternativaIngredienteService {
     }
 
     public AlternativaIngredienteDTO atualizar(Long id, AlternativaIngredienteDTO dto) {
+        validator.validar(dto);
         AlternativaIngrediente alternativaExistente = buscarEntidadePorId(id);
 
         if (alternativaExistente.getDataFim() != null) {

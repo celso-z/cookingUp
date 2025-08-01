@@ -4,6 +4,7 @@ import br.ufjf.cookingup.exception.RegraNegocioException;
 import br.ufjf.cookingup.model.dto.MembroDTO;
 import br.ufjf.cookingup.model.entity.Membro;
 import br.ufjf.cookingup.model.repository.MembroRepository;
+import br.ufjf.cookingup.model.validator.MembroValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ public class MembroService {
     @Autowired
     private MembroRepository membroRepository;
 
+    @Autowired
+    private MembroValidator validator;
+
     public Membro converter(MembroDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(dto, Membro.class);
@@ -28,6 +32,7 @@ public class MembroService {
     }
 
     public MembroDTO salvar(MembroDTO dto) {
+        validator.validar(dto);
         Membro membro = converter(dto);
         membro.setDataCadastro(LocalDate.now());
         membro.setDataFim(null);
@@ -56,6 +61,7 @@ public class MembroService {
     }
 
     public MembroDTO atualizar(Long id, MembroDTO dto) {
+        validator.validar(dto);
         Membro membroExistente = buscarEntidadePorId(id);
 
         if (membroExistente.getDataFim() != null) {
