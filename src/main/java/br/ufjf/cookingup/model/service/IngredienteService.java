@@ -23,10 +23,18 @@ public class IngredienteService {
     @Autowired
     private AlternativaIngredienteRepository alternativaIngredienteRepository;
 
-    private ModelMapper modelMapper;
+    public Ingrediente converter(IngredienteDTO dto) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(dto, Ingrediente.class);
+    }
+
+    public void converterParaEntidade(IngredienteDTO dto, Ingrediente ingrediente) {
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.map(dto, ingrediente);
+    }
 
     public IngredienteDTO salvar(IngredienteDTO dto) {
-        Ingrediente ingrediente = modelMapper.map(dto, Ingrediente.class);
+        Ingrediente ingrediente = converter(dto);
         ingrediente.setDataFim(null);
         ingrediente = ingredienteRepository.save(ingrediente);
         return new IngredienteDTO(ingrediente);
@@ -59,7 +67,7 @@ public class IngredienteService {
             throw new RegraNegocioException("Não é possível atualizar um ingrediente que já foi deletado com id: " + id);
         }
 
-        modelMapper.map(dto, ingredienteExistente);
+        converterParaEntidade(dto, ingredienteExistente);
         ingredienteExistente.setId(id);
 
         Ingrediente ingredienteAtualizado = ingredienteRepository.save(ingredienteExistente);

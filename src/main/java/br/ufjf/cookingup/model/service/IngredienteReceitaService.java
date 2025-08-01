@@ -4,7 +4,6 @@ import br.ufjf.cookingup.exception.RegraNegocioException;
 import br.ufjf.cookingup.model.dto.IngredienteReceitaDTO;
 import br.ufjf.cookingup.model.entity.IngredienteReceita;
 import br.ufjf.cookingup.model.repository.IngredienteReceitaRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -16,7 +15,6 @@ public class IngredienteReceitaService {
     @Autowired
     private IngredienteReceitaRepository ingredienteReceitaRepository;
 
-    private ModelMapper modelMapper;
 
     // Métodos de CRUD (salvar, atualizar, deletar) foram movidos para ReceitaService
 

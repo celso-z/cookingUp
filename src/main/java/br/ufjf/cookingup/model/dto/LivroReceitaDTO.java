@@ -11,14 +11,12 @@ public class LivroReceitaDTO {
     private Long id;
     private String titulo;
     private Long idProprietario;
-    private String nomeProprietario;
 
     public static LivroReceitaDTO create(LivroReceita livro) {
         ModelMapper modelMapper = new ModelMapper();
         LivroReceitaDTO dto = modelMapper.map(livro, LivroReceitaDTO.class);
         if (livro.getProprietario() != null) {
             dto.idProprietario = livro.getProprietario().getId();
-            dto.nomeProprietario = livro.getProprietario().getNome();
         }
         return dto;
     }

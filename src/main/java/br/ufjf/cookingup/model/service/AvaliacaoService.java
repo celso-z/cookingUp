@@ -9,7 +9,6 @@ import br.ufjf.cookingup.model.entity.Receita;
 import br.ufjf.cookingup.model.repository.AvaliacaoRepository;
 import br.ufjf.cookingup.model.repository.MembroRepository;
 import br.ufjf.cookingup.model.repository.ReceitaRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
@@ -28,7 +27,6 @@ public class AvaliacaoService {
     @Autowired
     private ReceitaRepository receitaRepository;
 
-    private ModelMapper modelMapper;
 
     public AvaliacaoDTO salvar(AvaliacaoDTO dto) {
         Avaliacao avaliacao = new Avaliacao();

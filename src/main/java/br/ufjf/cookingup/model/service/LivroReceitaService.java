@@ -11,7 +11,6 @@ import br.ufjf.cookingup.model.repository.LivroReceitaRepository;
 import br.ufjf.cookingup.model.repository.MembroRepository;
 import br.ufjf.cookingup.model.repository.ReceitaRepository;
 import br.ufjf.cookingup.model.repository.ReceitaLivroReceitaRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
@@ -34,7 +33,6 @@ public class LivroReceitaService {
     @Autowired
     private ReceitaLivroReceitaRepository receitaLivroReceitaRepository;
 
-    private ModelMapper modelMapper;
 
     public LivroReceitaDTO salvar(LivroReceitaDTO dto) {
         LivroReceita livroReceita = new LivroReceita();

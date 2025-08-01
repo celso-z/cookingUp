@@ -6,7 +6,6 @@ import br.ufjf.cookingup.model.entity.AlternativaIngrediente;
 import br.ufjf.cookingup.model.entity.Ingrediente;
 import br.ufjf.cookingup.model.repository.AlternativaIngredienteRepository;
 import br.ufjf.cookingup.model.repository.IngredienteRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
@@ -22,7 +21,6 @@ public class AlternativaIngredienteService {
     @Autowired
     private IngredienteRepository ingredienteRepository;
 
-    private ModelMapper modelMapper = new ModelMapper();
 
     public AlternativaIngredienteDTO salvar(AlternativaIngredienteDTO dto) {
         AlternativaIngrediente alternativaIngrediente = new AlternativaIngrediente();

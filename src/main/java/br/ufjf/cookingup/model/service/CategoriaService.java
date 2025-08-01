@@ -17,10 +17,18 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    private ModelMapper modelMapper;
+    public Categoria converter(CategoriaDTO dto) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(dto, Categoria.class);
+    }
+
+    public void converterParaEntidade(CategoriaDTO dto, Categoria categoria) {
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.map(dto, categoria);
+    }
 
     public CategoriaDTO salvar(CategoriaDTO dto) {
-        Categoria categoria = modelMapper.map(dto, Categoria.class);
+        Categoria categoria = converter(dto);
         categoria.setDataInicio(LocalDate.now());
         categoria.setDataFim(null);
         categoria = categoriaRepository.save(categoria);
@@ -54,7 +62,7 @@ public class CategoriaService {
             throw new RegraNegocioException("Não é possível atualizar uma categoria que já foi deletada com id: " + id);
         }
 
-        modelMapper.map(dto, categoriaExistente);
+        converterParaEntidade(dto, categoriaExistente);
         categoriaExistente.setId(id);
 
         Categoria categoriaAtualizada = categoriaRepository.save(categoriaExistente);

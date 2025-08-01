@@ -17,10 +17,18 @@ public class ChefService {
     @Autowired
     private ChefRepository chefRepository;
 
-    private ModelMapper modelMapper;
+    public Chef converter(ChefDTO dto) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(dto, Chef.class);
+    }
+
+    public void converterParaEntidade(ChefDTO dto, Chef chef) {
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.map(dto, chef);
+    }
 
     public ChefDTO salvar(ChefDTO dto) {
-        Chef chef = modelMapper.map(dto, Chef.class);
+        Chef chef = converter(dto);
         chef.setDataCadastro(LocalDate.now());
         chef.setDataFim(null);
         chef = chefRepository.save(chef);
@@ -54,7 +62,7 @@ public class ChefService {
             throw new RegraNegocioException("Não é possível atualizar um chef que já foi deletado com id: " + id);
         }
 
-        modelMapper.map(dto, chefExistente);
+        converterParaEntidade(dto, chefExistente);
         chefExistente.setId(id);
 
         Chef chefAtualizado = chefRepository.save(chefExistente);

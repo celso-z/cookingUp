@@ -17,10 +17,18 @@ public class AdministradorService {
     @Autowired
     private AdministradorRepository administradorRepository;
 
-    private ModelMapper modelMapper;
+    public Administrador converter(AdministradorDTO dto) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(dto, Administrador.class);
+    }
+
+    public void converterParaEntidade(AdministradorDTO dto, Administrador administrador) {
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.map(dto, administrador);
+    }
 
     public AdministradorDTO salvar(AdministradorDTO dto) {
-        Administrador administrador = modelMapper.map(dto, Administrador.class);
+        Administrador administrador = converter(dto);
         administrador.setDataCadastro(LocalDate.now());
         administrador.setDataFim(null);
         administrador = administradorRepository.save(administrador);
@@ -51,7 +59,7 @@ public class AdministradorService {
             throw new RegraNegocioException("Não é possível atualizar um administrador que já foi deletado com id: " + id);
         }
 
-        modelMapper.map(dto, administradorExistente);
+        converterParaEntidade(dto, administradorExistente);
         administradorExistente.setId(id);
 
         Administrador administradorAtualizado = administradorRepository.save(administradorExistente);

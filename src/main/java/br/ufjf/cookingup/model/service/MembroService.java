@@ -17,10 +17,18 @@ public class MembroService {
     @Autowired
     private MembroRepository membroRepository;
 
-    private ModelMapper modelMapper;
+    public Membro converter(MembroDTO dto) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(dto, Membro.class);
+    }
+
+    public void converterParaEntidade(MembroDTO dto, Membro membro) {
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.map(dto, membro);
+    }
 
     public MembroDTO salvar(MembroDTO dto) {
-        Membro membro = modelMapper.map(dto, Membro.class);
+        Membro membro = converter(dto);
         membro.setDataCadastro(LocalDate.now());
         membro.setDataFim(null);
         membro = membroRepository.save(membro);
@@ -54,7 +62,7 @@ public class MembroService {
             throw new RegraNegocioException("Não é possível atualizar um membro que já foi deletado com id: " + id);
         }
 
-        modelMapper.map(dto, membroExistente);
+        converterParaEntidade(dto, membroExistente);
         membroExistente.setId(id);
 
         Membro membroAtualizado = membroRepository.save(membroExistente);

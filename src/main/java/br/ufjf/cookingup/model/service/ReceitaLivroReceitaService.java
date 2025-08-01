@@ -4,7 +4,6 @@ import br.ufjf.cookingup.exception.RegraNegocioException;
 import br.ufjf.cookingup.model.dto.ReceitaLivroReceitaDTO;
 import br.ufjf.cookingup.model.entity.ReceitaLivroReceita;
 import br.ufjf.cookingup.model.repository.ReceitaLivroReceitaRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -16,7 +15,6 @@ public class ReceitaLivroReceitaService {
     @Autowired
     private ReceitaLivroReceitaRepository receitaLivroReceitaRepository;
 
-    private ModelMapper modelMapper;
 
     public List<ReceitaLivroReceitaDTO> buscarTodos() {
         return receitaLivroReceitaRepository.findByDataFimIsNull()

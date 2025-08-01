@@ -34,10 +34,23 @@ public class ReceitaService {
     @Autowired
     private IngredienteReceitaRepository ingredienteReceitaRepository;
 
-    private ModelMapper modelMapper;
+    public Receita converter(ReceitaDTO dto) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(dto, Receita.class);
+    }
+
+    public void converterParaEntidade(ReceitaDTO dto, Receita receita) {
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.map(dto, receita);
+    }
+
+    public IngredienteReceita converterIngredienteReceita(IngredienteReceitaDTO dto) {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(dto, IngredienteReceita.class);
+    }
 
     public ReceitaDTO salvar(ReceitaDTO dto) {
-        Receita receita = modelMapper.map(dto, Receita.class);
+        Receita receita = converter(dto);
         receita.setDataCadastro(LocalDate.now());
         receita.setDataFim(null);
 
@@ -78,7 +91,7 @@ public class ReceitaService {
             throw new RegraNegocioException("Não é possível atualizar uma receita que já foi deletada com id: " + id);
         }
 
-        modelMapper.map(dto, receitaExistente);
+        converterParaEntidade(dto, receitaExistente);
         receitaExistente.setId(id);
 
         if (dto.getIdCategoria() != null) {
@@ -125,7 +138,7 @@ public class ReceitaService {
             throw new RegraNegocioException("Este ingrediente já foi adicionado a esta receita.");
         }
 
-        IngredienteReceita ingredienteReceita = modelMapper.map(ingredienteReceitaDTO, IngredienteReceita.class);
+        IngredienteReceita ingredienteReceita = converterIngredienteReceita(ingredienteReceitaDTO);
         ingredienteReceita.setReceita(receita);
         ingredienteReceita.setIngrediente(ingrediente);
         ingredienteReceita.setDataFim(null);
