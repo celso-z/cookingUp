@@ -54,7 +54,7 @@ public class UsuarioService implements UserDetailsService {
 	        	roles = new String[]{"CHEF"};
 	            break; 
 	        case "ADMIN":
-	        	roles = new String[]{"MEMBRO", "ADMIN"};
+	        	roles = new String[]{"MEMBRO", "CHEF", "ADMIN"};
 	            break;
         }
 
