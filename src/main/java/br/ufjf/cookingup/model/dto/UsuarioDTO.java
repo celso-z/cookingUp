@@ -16,6 +16,7 @@ public class UsuarioDTO {
     private String senha;
     private LocalDate dataCadastro;
     private String fotoPerfil;
+    private String tipo;
 
     public UsuarioDTO(Usuario usuario) {
         if (usuario == null)
@@ -26,5 +27,6 @@ public class UsuarioDTO {
         this.senha = usuario.getSenha();
         this.dataCadastro = usuario.getDataCadastro();
         this.fotoPerfil = usuario.getFotoPerfil();
+        this.fotoPerfil = usuario.getTipo();
     }
 }
