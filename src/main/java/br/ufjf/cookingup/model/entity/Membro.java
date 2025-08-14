@@ -3,6 +3,7 @@ package br.ufjf.cookingup.model.entity;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,6 +17,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@DiscriminatorValue("MEMBRO")
 // @AttributeOverrides para mapear TODOS os campos herdados
 @AttributeOverrides({
 		@AttributeOverride(name = "id", column = @Column(name = "id")),
