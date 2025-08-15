@@ -9,7 +9,7 @@ package br.ufjf.cookingup.model.controller;
     import java.util.List;
 
     @RestController
-    @RequestMapping("/avaliacao")
+    @RequestMapping("/api/v1/avaliacoes")
     @CrossOrigin("*")
     public class AvaliacaoController {
 

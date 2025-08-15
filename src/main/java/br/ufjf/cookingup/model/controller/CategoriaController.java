@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/categoria")
+@RequestMapping("/api/v1/categorias")
 @CrossOrigin("*")
 public class CategoriaController {
 
